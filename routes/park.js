@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
 const parks = require('../park');
+
 
 router.get('/', (req, res) => {
     return res.status(200).json({
@@ -29,12 +29,13 @@ router.post('/', (req, res) => {
           error: 'req body value more 1',
         });
     }
-    parks.splice(0,parks.length); // for clear park
+    parks.splice(0, parks.length); // for clear park
     for(let i = 1 ; i <= req.body.value ; i++){
         const newPark = {
             id : i,
             name : `A-${i}`,
-            status : `ready`
+            status : `ready`,
+            count : 0
         }
         parks.push(newPark);
     }

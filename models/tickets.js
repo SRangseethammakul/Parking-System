@@ -45,5 +45,25 @@ module.exports.createTicker = (newTicket, callBack) => {
     newTicket.save(callBack);
 }
 module.exports.getTicketByNumberPlate = (numberPlate, callBack) => {
-    tickets.findOne({numberPlate : numberPlate}, callBack);
+    tickets.findOne({
+        numberPlate : numberPlate,
+        living : true
+    }, callBack);
+}
+module.exports.updateTicket = (data, callBack) => {
+    const now = new Date();
+    let query = {
+        _id : data
+    };
+    tickets.findOneAndUpdate(query, {
+        $set:{
+            living : false,
+            updated : now
+        }
+    },{new:true}, callBack);
+}
+module.exports.getTicketBySize = (size, callBack) => {
+    tickets.find({
+        carSize : size
+    }, callBack);
 }

@@ -2,13 +2,16 @@ const express = require('express');
 const router = express.Router();
 const parks = require('../park');
 const Tickets = require('../models/tickets');
+const { updateTicket, getTicket, updatePark } = require('../leavePark');
+const { createTicket, getTicketBySize } = require('../entryPark');
+
 router.get('/', (req, res) => {
     return res.status(200).json({
         status: 'success',
         data: parks,
     });
 });
-router.post('/create', (req, res) => {
+router.post('/create',async (req, res) => {
     const park_fillter = parks.filter((park) => {
         return park.status === 'ready';
     });
@@ -18,7 +21,13 @@ router.post('/create', (req, res) => {
         });
     }
     const {numberPlate, carSize} = req.body;
-    console.log(numberPlate, carSize);
+    const ticket = await getTicket(numberPlate);
+    console.log(ticket);
+    if(ticket){
+        return res.status(400).json({
+            status: 'numberPlate undefined',
+        });
+    }
     park_fillter[0].status = 'usable';
     let data = new Tickets({
         numberPlate : numberPlate,
@@ -27,31 +36,29 @@ router.post('/create', (req, res) => {
         parkLotName : park_fillter[0].name,
         living : true,
     });
-    Tickets.createTicker(data, function(err){
-        if(err) throw err;
-        return res.status(200).json({
-            status: 'success',
-            data: {
-                numberPlate : numberPlate,
-                carSize : carSize,
-                Lot : park_fillter[0].name
-            }
-        });
-    });
-});
-router.put('/leave/:numberPlate', (req, res) => {
-    const { numberPlate } = req.params;
-    console.log(numberPlate);
-    Tickets.getTicketByNumberPlate(numberPlate, function(err, data){
-        if(err) throw err;
-        var { _id, parkLotId } = data;
-    });
-    console.log(_id, parkLotId);
+    const resDate = await createTicket(data);
     return res.status(200).json({
         status: 'success',
         data: {
-            numberPlate : numberPlate
+            numberPlate : resDate.numberPlate,
+            carSize : resDate.carSize,
+            Lot : resDate.parkLotName
         }
+    });
+});
+router.put('/leave/:numberPlate', async (req, res) => {
+    const { numberPlate } = req.params;
+    const ticket = await getTicket(numberPlate);
+    console.log(!ticket);
+    if(!ticket){
+        return res.status(400).json({
+            status: 'numberPlate undefined',
+        });
+    }
+    await updateTicket(ticket._id);
+    await updatePark(ticket.parkLotId);
+    return res.status(200).json({
+        status: 'success'
     });
 });
 router.get('/:status', (req, res) => {
@@ -70,4 +77,25 @@ router.get('/:status', (req, res) => {
         total : park_fillter.length
     });
 });
+
+router.get('/getTicketBySize/:size', async (req, res) => {
+    const { size } = req.params;
+    console.log(size);
+    const cars = await getTicketBySize(req.params.size);
+    const carBySize = cars.map(car => ({
+        numberPlate: car.numberPlate,
+        parkLotName : car.parkLotName,
+        Status : car.living ? "usable" : "Not in use",
+        entry : car.created.toLocaleDateString(),
+        leave : car.living ? "usable" : car.updated.toLocaleDateString('th-TH'),
+        timeUse : car.living ? "usable" : `${(car.updated - car.created) / 1000} seconds`,
+    }));
+    console.log("olderPerson : ", carBySize);
+    return res.status(200).json({
+        status: 'success',
+        data : carBySize,
+        total : cars.length
+    });
+});
+
 module.exports = router;
