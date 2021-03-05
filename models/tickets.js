@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const mongo = require('mongodb');
-const dbURL = 'mongodb://localhost:27017/TicketDB';
+const dbURL = 'mongodb://mongo:27017/docker-node-mongo';
 
 mongoose.connect(dbURL, {
     useNewUrlParser : true
