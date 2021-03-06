@@ -21,14 +21,15 @@ router.post('/create',async (req, res) => {
         });
     }
     const {numberPlate, carSize} = req.body;
-    const ticket = await getTicket(numberPlate);
+    const ticket = await getTicket(numberPlate, true);
     console.log(ticket);
-    if(ticket){
+    if(ticket.length > 0){
         return res.status(400).json({
             status: 'numberPlate undefined',
         });
     }
     park_fillter[0].status = 'usable';
+    park_fillter[0].useBy = numberPlate;
     let data = new Tickets({
         numberPlate : numberPlate,
         carSize : carSize,
@@ -48,15 +49,15 @@ router.post('/create',async (req, res) => {
 });
 router.put('/leave/:numberPlate', async (req, res) => {
     const { numberPlate } = req.params;
-    const ticket = await getTicket(numberPlate);
-    console.log(!ticket);
-    if(!ticket){
+    const ticket = await getTicket(numberPlate, true);
+    console.log(ticket);
+    if(ticket.length === 0 ){
         return res.status(400).json({
             status: 'numberPlate undefined',
         });
     }
-    await updateTicket(ticket._id);
-    await updatePark(ticket.parkLotId);
+    await updateTicket(ticket[0]._id);
+    await updatePark(ticket[0].parkLotId);
     return res.status(200).json({
         status: 'success'
     });
@@ -97,5 +98,14 @@ router.get('/getTicketBySize/:size', async (req, res) => {
         total : cars.length
     });
 });
-
+router.get('/getUseTicketBynumberPlate/:numberPlate', async (req, res) => {
+    const { numberPlate } = req.params;
+    const ticket = await getTicket(numberPlate, false);
+    console.log(ticket);
+    return res.status(200).json({
+        status: 'success',
+        data : ticket,
+        total : ticket.length
+    });
+});
 module.exports = router;

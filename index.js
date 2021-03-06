@@ -4,7 +4,10 @@ const express = require('express');
 const app = express();
  
 app.get('/', (req, res) => {
-    res.json('Parking');
+    res.json({
+        version : '1.0.1',
+        description : 'api parking'
+    });
 });
  
 const parkRouter = require('./routes/park');

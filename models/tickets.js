@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const mongo = require('mongodb');
-const dbURL = 'mongodb://mongo:27017/docker-node-mongo';
-
+const dbURL = 'mongodb://mongo:27017/docker-node-Parking';
+// const dbURL = 'mongodb://localhost:27017/TicketDB';
 mongoose.connect(dbURL, {
     useNewUrlParser : true
 });
@@ -44,10 +44,10 @@ const tickets = module.exports = mongoose.model("tickets", ticketSchema);
 module.exports.createTicker = (newTicket, callBack) => {
     newTicket.save(callBack);
 }
-module.exports.getTicketByNumberPlate = (numberPlate, callBack) => {
-    tickets.findOne({
+module.exports.getTicketByNumberPlate = (numberPlate, status, callBack) => {
+    tickets.find({
         numberPlate : numberPlate,
-        living : true
+        living : status
     }, callBack);
 }
 module.exports.updateTicket = (data, callBack) => {
@@ -66,4 +66,10 @@ module.exports.getTicketBySize = (size, callBack) => {
     tickets.find({
         carSize : size
     }, callBack);
+}
+module.exports.updateStatuAll = (callBack) => {
+    tickets.updateMany(
+        { $set: { "living" : false } },
+        callBack
+    );
 }
