@@ -2,7 +2,7 @@
 create an automated ticketing system that allows my customers to use my parking lot
 with NodeJs, Mongo, Docker
 
-## Available Scripts
+## How to run the completed project
 
 In the project directory, you can run:
 ### `docker-compose build`
