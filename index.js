@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
  
 const parkRouter = require('./routes/park');
 const ticketRouter = require('./routes/ticket');
+const lineMessageRouter = require('./routes/linemessage');
  
 const logger = require('./middleware/logger');
  
@@ -26,6 +27,7 @@ app.use(logger);
 
 app.use('/apis/parks', parkRouter);
 app.use('/apis/ticket', ticketRouter);
+app.use('/apis/linemessage', lineMessageRouter);
 
 app.listen('3000', () => {
     console.log('Port 3000');
