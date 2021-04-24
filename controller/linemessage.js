@@ -18,7 +18,7 @@ exports.linewebhook = async (req, res, next) => {
         function welcome(agent) {
             console.log("---------------------line welcome---------------------------");
             agent.add(`Welcome to my agent!`);
-            
+            agent.add(payload);	
         }
 
         let intentMap = new Map();
