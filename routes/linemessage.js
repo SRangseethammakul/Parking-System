@@ -437,8 +437,8 @@ router.post('/', (req, res) => {
     }
 
     function bodyMassIndex(agent) {
-        let weight = request.body.queryResult.parameters.weight;
-        let height = request.body.queryResult.parameters.length / 100;
+        let weight = req.body.queryResult.parameters.weight;
+        let height = req.body.queryResult.parameters.length / 100;
         let bmi = (weight / (height * height)).toFixed(2);
 
         let result = "none";
