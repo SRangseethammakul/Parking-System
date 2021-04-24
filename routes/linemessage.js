@@ -477,7 +477,7 @@ router.post('/', (req, res) => {
         let payload = new Payload("LINE", payloadJson, {
             sendAsMessage: true
         });
-        agent.add(result);
+        agent.add(`${result} , BMI : ${bmi}`);
         agent.add(payload);
     }
     let intentMap = new Map();
