@@ -2,10 +2,16 @@ const express = require('express');
 const {
     WebhookClient
 } = require('dialogflow-fulfillment');
-const {Card, Suggestion, Payload} = require('dialogflow-fulfillment');
+const {
+    Card,
+    Suggestion,
+    Payload
+} = require('dialogflow-fulfillment');
 const router = express.Router();
-const {getCovid} = require('../controller/linemessage');
-router.get('/',async (req ,res) => {
+const {
+    getCovid
+} = require('../controller/linemessage');
+router.get('/', async (req, res) => {
     const dataCovid = await getCovid();
     console.log(dataCovid);
     return res.status(200).json({
@@ -19,7 +25,7 @@ router.post('/', (req, res) => {
         response: res
     });
     async function welcome(agent) {
-        try{
+        try {
             console.log("---------------------line welcome---------------------------");
             const dataCovid = await getCovid();
             let payloadJson = {
@@ -30,8 +36,7 @@ router.post('/', (req, res) => {
                     "body": {
                         "type": "box",
                         "layout": "vertical",
-                        "contents": [
-                            {
+                        "contents": [{
                                 "type": "text",
                                 "text": "สถานะการณ์โควิด",
                                 "margin": "md",
@@ -46,8 +51,7 @@ router.post('/', (req, res) => {
                             {
                                 "type": "box",
                                 "layout": "horizontal",
-                                "contents": [
-                                    {
+                                "contents": [{
                                         "type": "text",
                                         "text": "วันที่",
                                         "color": "#aaaaaa"
@@ -68,8 +72,7 @@ router.post('/', (req, res) => {
                             {
                                 "type": "box",
                                 "layout": "vertical",
-                                "contents": [
-                                    {
+                                "contents": [{
                                         "type": "text",
                                         "text": "ข้อมูลประจำวัน",
                                         "align": "center"
@@ -77,8 +80,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "ติดเชื้อ"
                                             },
@@ -93,8 +95,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "รักษาอยู่"
                                             },
@@ -109,8 +110,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "หายแล้ว"
                                             },
@@ -125,8 +125,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "เสียชีวิต"
                                             },
@@ -149,8 +148,7 @@ router.post('/', (req, res) => {
                             {
                                 "type": "box",
                                 "layout": "vertical",
-                                "contents": [
-                                    {
+                                "contents": [{
                                         "type": "text",
                                         "text": "ข้อมูลสะสม",
                                         "align": "center"
@@ -158,8 +156,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "ติดเชื้อ"
                                             },
@@ -174,8 +171,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "รักษาอยู่"
                                             },
@@ -190,8 +186,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "หายแล้ว"
                                             },
@@ -206,8 +201,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "เสียชีวิต"
                                             },
@@ -237,7 +231,7 @@ router.post('/', (req, res) => {
         }
     }
     async function covid19(agent) {
-        try{
+        try {
             console.log("---------------------line welcome---------------------------");
             const dataCovid = await getCovid();
             let payloadJson = {
@@ -248,8 +242,7 @@ router.post('/', (req, res) => {
                     "body": {
                         "type": "box",
                         "layout": "vertical",
-                        "contents": [
-                            {
+                        "contents": [{
                                 "type": "text",
                                 "text": "สถานะการณ์โควิด",
                                 "margin": "md",
@@ -264,8 +257,7 @@ router.post('/', (req, res) => {
                             {
                                 "type": "box",
                                 "layout": "horizontal",
-                                "contents": [
-                                    {
+                                "contents": [{
                                         "type": "text",
                                         "text": "วันที่",
                                         "color": "#aaaaaa"
@@ -286,8 +278,7 @@ router.post('/', (req, res) => {
                             {
                                 "type": "box",
                                 "layout": "vertical",
-                                "contents": [
-                                    {
+                                "contents": [{
                                         "type": "text",
                                         "text": "ข้อมูลประจำวัน",
                                         "align": "center"
@@ -295,8 +286,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "ติดเชื้อ"
                                             },
@@ -311,8 +301,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "รักษาอยู่"
                                             },
@@ -327,8 +316,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "หายแล้ว"
                                             },
@@ -343,8 +331,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "เสียชีวิต"
                                             },
@@ -367,8 +354,7 @@ router.post('/', (req, res) => {
                             {
                                 "type": "box",
                                 "layout": "vertical",
-                                "contents": [
-                                    {
+                                "contents": [{
                                         "type": "text",
                                         "text": "ข้อมูลสะสม",
                                         "align": "center"
@@ -376,8 +362,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "ติดเชื้อ"
                                             },
@@ -392,8 +377,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "รักษาอยู่"
                                             },
@@ -408,8 +392,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "หายแล้ว"
                                             },
@@ -424,8 +407,7 @@ router.post('/', (req, res) => {
                                     {
                                         "type": "box",
                                         "layout": "horizontal",
-                                        "contents": [
-                                            {
+                                        "contents": [{
                                                 "type": "text",
                                                 "text": "เสียชีวิต"
                                             },
@@ -453,9 +435,54 @@ router.post('/', (req, res) => {
             console.error(error);
         }
     }
+
+    function bodyMassIndex(agent) {
+        let weight = request.body.queryResult.parameters.weight;
+        let height = request.body.queryResult.parameters.length / 100;
+        let bmi = (weight / (height * height)).toFixed(2);
+
+        let result = "none";
+        let pkgId = "1";
+        let stkId = "1";
+
+        if (bmi < 18.5) {
+            result = "xs";
+            pkgId = "11538";
+            stkId = "51626519";
+        } else if (bmi >= 18.5 && bmi < 23) {
+            result = "s";
+            pkgId = "11537";
+            stkId = "52002741";
+        } else if (bmi >= 23 && bmi < 25) {
+            result = "m";
+            pkgId = "11537";
+            stkId = "52002745";
+        } else if (bmi >= 25 && bmi < 30) {
+            result = "l";
+            pkgId = "11537";
+            stkId = "52002762";
+        } else if (bmi >= 30) {
+            result = "xl";
+            pkgId = "11538";
+            stkId = "51626513";
+        }
+
+        let payloadJson = {
+            "type": "sticker",
+            "packageId": pkgId,
+            "stickerId": stkId
+        };
+
+        let payload = new Payload("LINE", payloadJson, {
+            sendAsMessage: true
+        });
+        agent.add(result);
+        agent.add(payload);
+    }
     let intentMap = new Map();
     intentMap.set('Default Welcome Intent', welcome);
     intentMap.set('Covid-19', covid19);
+    intentMap.set('BMI - custom - yes', bodyMassIndex);
     agent.handleRequest(intentMap);
 });
 module.exports = router;
