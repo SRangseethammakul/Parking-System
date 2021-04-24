@@ -2,6 +2,7 @@ const express = require('express');
 const {
     WebhookClient
 } = require('dialogflow-fulfillment');
+const {Card, Suggestion, Payload} = require('dialogflow-fulfillment');
 const router = express.Router();
 const lineMessage = require('../controller/linemessage');
 
