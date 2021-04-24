@@ -13,58 +13,18 @@ exports.linewebhook = async (req, res, next) => {
         //  type: 'message'
         //   }
         // }
-        console.log("---------------------line---------------------------")
-        console.log(req.body) 
-        console.log("---------------------payload---------------------------")
-        console.log(req.body.originalDetectIntentRequest.payload) 
-        console.log(req.body.originalDetectIntentRequest.payload.data.source.groupId)
-        let getgroupid = req.body.originalDetectIntentRequest.payload.data.source.groupId; 
-
-        console.log("🚀 ~ file: lineController.js ~ line 119 ~ exports.linewebhook= ~ getgroupid", getgroupid)
-
-
         const agent = new WebhookClient({request: req, response: res});
-        // console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
-        // console.log('Dialogflow Request body: ' + JSON.stringify(req.body));
-        function welcome(agent) {
-            console.log("---------------------line welcome---------------------------")
-        }
-
-        async function register(agent) {
-            console.log("---------------------line fallback---------------------------")
-            let gettext = req.body.queryResult.queryText; 
-            console.log("🚀 ~ file: lineController.js ~ line 135 ~ register ~ gettext", gettext)
-            let getcode = gettext.split(":")[1].trim();
-            console.log("🚀 ~ file: lineController.js ~ line 136 ~ register ~ getcode", getcode)
-            // "code": 1,
-            // "message": "success",
-            // "data": [
-            //     {
-            //         "message": "ลงทะเบียนสำเร็จ"
-            //     }
-            // ]
-            let getSaveCode = await lineGroupController.saveLineGroupId(getcode,getgroupid);
-            
-            agent.add(`${getSaveCode.data[0].message}`);
-
-            const {queryResult} = req.body;
-
-        }
-        let intentMap = new Map();
         
-        console.log("---------------------line intentMap---------------------------")
+        function welcome(agent) {
+            console.log("---------------------line welcome---------------------------");
+            agent.add(`Welcome to my agent!`);
+            
+        }
+
+
+        let intentMap = new Map();
         intentMap.set('Default Welcome Intent', welcome);
-
-        intentMap.set('register', register);
-        console.log(intentMap)
-        console.log("---------------------line intentMap set---------------------------")
-        // intentMap.set('your intent name here', yourFunctionHandler);
-        // intentMap.set('your intent name here', googleAssistantHandler);
-        console.log("---------------------line start hand---------------------------")
         agent.handleRequest(intentMap);
-        console.log("---------------------line end hand---------------------------")
-        // console.log(req.body)
-
     } catch (error) {
         next(error); 
     }
