@@ -448,7 +448,6 @@ router.post('/', (req, res) => {
             let payload = new Payload("LINE", payloadJson, {
                 sendAsMessage: true
             });
-            agent.add(`Welcome to my agent!`);
             agent.add(payload);
         } catch (error) {
             console.error(error);
