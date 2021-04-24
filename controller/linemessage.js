@@ -14,13 +14,12 @@ exports.linewebhook = async (req, res, next) => {
         //   }
         // }
         const agent = new WebhookClient({request: req, response: res});
-        
+
         function welcome(agent) {
             console.log("---------------------line welcome---------------------------");
             agent.add(`Welcome to my agent!`);
             
         }
-
 
         let intentMap = new Map();
         intentMap.set('Default Welcome Intent', welcome);
