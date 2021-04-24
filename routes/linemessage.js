@@ -84,7 +84,7 @@ router.post('/', (req, res) => {
                                             },
                                             {
                                                 "type": "text",
-                                                "text": "10",
+                                                "text": `${dataCovid.NewConfirmed}`,
                                                 "size": "sm",
                                                 "align": "end"
                                             }
@@ -100,7 +100,7 @@ router.post('/', (req, res) => {
                                             },
                                             {
                                                 "type": "text",
-                                                "text": "10",
+                                                "text": `${dataCovid.NewHospitalized}`,
                                                 "size": "sm",
                                                 "align": "end"
                                             }
@@ -116,7 +116,7 @@ router.post('/', (req, res) => {
                                             },
                                             {
                                                 "type": "text",
-                                                "text": "10",
+                                                "text": `${dataCovid.NewRecovered}`,
                                                 "size": "sm",
                                                 "align": "end"
                                             }
@@ -132,7 +132,7 @@ router.post('/', (req, res) => {
                                             },
                                             {
                                                 "type": "text",
-                                                "text": "10",
+                                                "text": `${dataCovid.NewDeaths}`,
                                                 "size": "sm",
                                                 "align": "end"
                                             }
@@ -165,7 +165,7 @@ router.post('/', (req, res) => {
                                             },
                                             {
                                                 "type": "text",
-                                                "text": "5",
+                                                "text": `${dataCovid.Confirmed}`,
                                                 "size": "sm",
                                                 "align": "end"
                                             }
@@ -181,7 +181,7 @@ router.post('/', (req, res) => {
                                             },
                                             {
                                                 "type": "text",
-                                                "text": "5",
+                                                "text": `${dataCovid.Hospitalized}`,
                                                 "size": "sm",
                                                 "align": "end"
                                             }
@@ -197,7 +197,7 @@ router.post('/', (req, res) => {
                                             },
                                             {
                                                 "type": "text",
-                                                "text": "5",
+                                                "text": `${dataCovid.NewRecovered}`,
                                                 "size": "sm",
                                                 "align": "end"
                                             }
@@ -213,7 +213,7 @@ router.post('/', (req, res) => {
                                             },
                                             {
                                                 "type": "text",
-                                                "text": "5",
+                                                "text": `${dataCovid.Deaths}`,
                                                 "size": "sm",
                                                 "align": "end"
                                             }
